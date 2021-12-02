@@ -1,6 +1,7 @@
 import { type } from "os";
 import { Navbar, Nav } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
+
 type TBrand = {
   brand: string;
 };
