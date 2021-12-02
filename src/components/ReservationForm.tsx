@@ -1,56 +1,57 @@
-import { useState } from 'react'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import { useState, FormEvent } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import { ReservationInterface } from "../helpers/IReservation";
 
 const ReservationForm = () => {
-  const [reservation, setReservation] = useState({
-    name: '',
-    phone: '',
+  const [reservation, setReservation] = useState<ReservationInterface>({
+    name: "",
+    phone: "",
     numberOfPeople: 1,
     smoking: false,
-    dateTime: '',
-    specialRequests: '',
-  })
+    dateTime: "",
+    specialRequests: "",
+  });
 
-  const handleInput = (fieldName, value) => {
+  const handleInput = (fieldName: string, value: any) => {
     setReservation({
       ...reservation,
       [fieldName]: value,
-    })
-  }
+    });
+  };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    console.log(reservation)
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    console.log(reservation);
     try {
       let response = await fetch(
-        'https://striveschool-api.herokuapp.com/api/reservation',
+        "https://striveschool-api.herokuapp.com/api/reservation",
         {
-          method: 'POST',
+          method: "POST",
           body: JSON.stringify(reservation),
           headers: {
-            'Content-type': 'application/json',
+            "Content-type": "application/json",
           },
         }
-      )
+      );
 
       if (response.ok) {
-        alert('OK!')
+        alert("OK!");
         setReservation({
-          name: '',
-          phone: '',
+          name: "",
+          phone: "",
           numberOfPeople: 1,
           smoking: false,
-          dateTime: '',
-          specialRequests: '',
-        })
+          dateTime: "",
+          specialRequests: "",
+        });
       } else {
-        alert('ERROR')
+        alert("ERROR");
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <>
@@ -59,11 +60,11 @@ const ReservationForm = () => {
         <Form.Group>
           <Form.Label>Your name</Form.Label>
           <Form.Control
-            type='text'
-            placeholder='Input your name'
+            type="text"
+            placeholder="Input your name"
             value={reservation.name}
             onChange={(e) => {
-              handleInput('name', e.target.value)
+              handleInput("name", e.target.value);
             }}
             required
           />
@@ -71,11 +72,11 @@ const ReservationForm = () => {
         <Form.Group>
           <Form.Label>Your phone</Form.Label>
           <Form.Control
-            type='tel'
-            placeholder='Input your cellphone'
+            type="tel"
+            placeholder="Input your cellphone"
             value={reservation.phone}
             onChange={(e) => {
-              handleInput('phone', e.target.value)
+              handleInput("phone", e.target.value);
             }}
             required
           />
@@ -83,10 +84,10 @@ const ReservationForm = () => {
         <Form.Group>
           <Form.Label>How many people?</Form.Label>
           <Form.Control
-            as='select'
+            as="select"
             value={reservation.numberOfPeople}
             onChange={(e) => {
-              handleInput('numberOfPeople', e.target.value)
+              handleInput("numberOfPeople", e.target.value);
             }}
             required
           >
@@ -100,21 +101,21 @@ const ReservationForm = () => {
         </Form.Group>
         <Form.Group>
           <Form.Check
-            type='checkbox'
-            label='Do you smoke?'
+            type="checkbox"
+            label="Do you smoke?"
             checked={reservation.smoking}
             onChange={(e) => {
-              handleInput('smoking', e.target.checked)
+              handleInput("smoking", e.target.checked);
             }}
           />
         </Form.Group>
         <Form.Group>
           <Form.Label>Date?</Form.Label>
           <Form.Control
-            type='datetime-local'
+            type="datetime-local"
             value={reservation.dateTime}
             onChange={(e) => {
-              handleInput('dateTime', e.target.value)
+              handleInput("dateTime", e.target.value);
             }}
             required
           />
@@ -122,20 +123,20 @@ const ReservationForm = () => {
         <Form.Group>
           <Form.Label>Any special request?</Form.Label>
           <Form.Control
-            as='textarea'
+            as="textarea"
             rows={5}
             value={reservation.specialRequests}
             onChange={(e) => {
-              handleInput('specialRequests', e.target.value)
+              handleInput("specialRequests", e.target.value);
             }}
           />
         </Form.Group>
-        <Button variant='primary' type='submit'>
+        <Button variant="primary" type="submit">
           Submit
         </Button>
       </Form>
     </>
-  )
-}
+  );
+};
 
-export default ReservationForm
+export default ReservationForm;
