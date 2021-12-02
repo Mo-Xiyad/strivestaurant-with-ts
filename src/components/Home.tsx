@@ -36,7 +36,7 @@ const Home = () => {
       </Row>
       <Row className="mt-3 justify-content-center">
         <Col xs={12} md={6} className="text-center">
-          {selectedDish ? <DishComments selectedDish={selectedDish} /> : null}
+          <DishComments selectedDish={selectedDish} />
         </Col>
       </Row>
     </Container>

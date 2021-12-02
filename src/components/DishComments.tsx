@@ -1,7 +1,7 @@
 import ListGroup from "react-bootstrap/ListGroup";
 import { ItemInterFace } from "../helpers/ItemInterface";
 interface DishCommentsProps {
-  selectedDish: ItemInterFace;
+  selectedDish: ItemInterFace | undefined;
 }
 
 const DishComments = ({ selectedDish }: DishCommentsProps) => (
